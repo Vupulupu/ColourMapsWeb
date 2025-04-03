@@ -1,0 +1,16 @@
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+nav {
+	display: flex; 
+	justify-content: center;
+}
+nav ul {
+	display: flex;
+	gap: 2rem;
+} nav ul li {
+	display: inline-block;
+}
