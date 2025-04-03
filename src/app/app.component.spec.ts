@@ -14,16 +14,10 @@ describe('AppComponent', () => {
 		expect(app).toBeTruthy();
 	});
 
-	it(`should have the 'CS312-T22-AngularPainting' title`, () => {
-		const fixture = TestBed.createComponent(AppComponent);
-		const app = fixture.componentInstance;
-		expect(app.title).toEqual('CS312-T22-AngularPainting');
-	});
-
 	it('should render title', () => {
 		const fixture = TestBed.createComponent(AppComponent);
 		fixture.detectChanges();
 		const compiled = fixture.nativeElement as HTMLElement;
-		expect(compiled.querySelector('h1')?.textContent).toContain('Hello, CS312-T22-AngularPainting');
+		expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Team 22');
 	});
 });
