@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
 	templateUrl: './drawing.component.html'
 })
 export class DrawingComponent {
-	title = "T22 Painting - Drawing Workspace";
 }
