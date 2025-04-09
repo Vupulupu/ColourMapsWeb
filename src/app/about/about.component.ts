@@ -22,9 +22,9 @@ export class AboutComponent {
       avatar: 'images/ryanimage.jpg'
 	},
     {
-      name: 'Team Member 2',
-      bio: ' ',
-      avatar: ' ' //path to image 
+      name: 'Richard Chavez',
+      bio: 'Junior at CSU, concentrating in software engineering as well as a minor in mathematics.',
+      avatar: 'images/richardimage.jpg' //path to image 
     },
     {
 		name: 'Team Member 3',
