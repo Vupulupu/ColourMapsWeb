@@ -1,16 +1,118 @@
-
-ul {
+/* Reset and base styles had to get help for this online  */
+* {
 	margin: 0;
 	padding: 0;
-}
-
-nav {
-	display: flex; 
-	justify-content: center;
-}
-nav ul {
+	box-sizing: border-box;
+  }
+  
+  body {
+	font-family: Arial, sans-serif;
+	line-height: 1.6;
+	color: #1a202c;
+  }
+  
+  /* Main container and layout */
+  .app-container {
 	display: flex;
-	gap: 2rem;
-} nav ul li {
-	display: inline-block;
-}
+	flex-direction: column;
+	min-height: 100vh;
+  }
+  
+  /* Header and navigation */
+  header {
+	background-color: #1a365d;
+	color: white;
+  }
+  
+  .navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 2rem;
+	max-width: 1200px;
+	margin: 0 auto;
+  }
+  
+  .logo-container {
+	display: flex;
+	align-items: center;
+  }
+  
+  .logo-container img {
+	height: 40px;
+	margin-right: 1rem;
+  }
+  
+  .logo-container h1 {
+	margin: 0;
+	font-size: 1.5rem;
+  }
+  
+  .nav-links {
+	display: flex;
+	list-style: none;
+  }
+  
+  .nav-links li {
+	margin-left: 1.5rem;
+  }
+  
+  .nav-links a {
+	color: white;
+	text-decoration: none;
+	padding: 0.5rem;
+	border-radius: 4px;
+	transition: background-color 0.3s;
+  }
+  
+  .nav-links a:hover {
+	background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .nav-links a.active {
+	background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Main content */
+  .main-content {
+	flex: 1;
+  }
+  
+  /* Footer */
+  footer {
+	background-color: #1a365d;
+	color: white;
+	text-align: center;
+	padding: 1rem;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+	.navbar {
+	  flex-direction: column;
+	}
+	
+	.logo-container {
+	  margin-bottom: 1rem;
+	}
+	
+	.nav-links {
+	  width: 100%;
+	  justify-content: space-around;
+	}
+	
+	.nav-links li {
+	  margin: 0;
+	}
+  }
+  
+  @media (max-width: 480px) {
+	.nav-links {
+	  flex-direction: column;
+	  align-items: center;
+	}
+	
+	.nav-links li {
+	  margin: 0.5rem 0;
+	}
+  }
