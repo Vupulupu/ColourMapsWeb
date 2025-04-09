@@ -27,9 +27,9 @@ export class AboutComponent {
       avatar: 'images/richardimage.jpg' //path to image 
     },
     {
-		name: 'Team Member 3',
-		bio: ' ',
-		avatar: ' ' //path to image 
+		name: 'Tarik Abughalib',
+		bio: 'Junior at CSU, focusing on networks and security. Currently working towards my Security+ certification. ',
+		avatar: 'images.tarikimage.jpg' //path to image 
 	},
 	{
 		name: 'Team Member 4',
