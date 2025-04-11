@@ -29,7 +29,7 @@ export class AboutComponent {
     {
 		name: 'Tarik Abughalib',
 		bio: 'Junior at CSU, focusing on networks and security. Currently working towards my Security+ certification. ',
-		avatar: 'images.tarikimage.jpg' //path to image 
+		avatar: 'images/tarikimage.jpg' //path to image 
 	},
 	{
 		name: 'Team Member 4',
