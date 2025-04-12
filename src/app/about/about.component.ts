@@ -32,9 +32,9 @@ export class AboutComponent {
 		avatar: 'images/tarikimage.jpg' //path to image 
 	},
 	{
-		name: 'Team Member 4',
-		bio: ' ',
-		avatar: ' ' //path to image 
+		name: 'Stephanie Didier',
+		bio: 'Senior at CSU, concentrating in software engineering with hobby in illustration and graphic design.',
+		avatar: 'images/stephimage.jpg' //path to image
 	},
 		
   ];
