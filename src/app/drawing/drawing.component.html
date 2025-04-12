@@ -1,1 +1,115 @@
-<h2>Drawing Workspace</h2>
+
+<div class="drawing-container">
+    <h1>Color Coordinate Generator</h1>
+    <!--input Form -->
+    <div class="form-container" *ngIf="!isTableGenerated">
+      <h2>Enter Parameters</h2>
+      <form (submit)="$event.preventDefault(); generateTables()">
+        <div class="form-group">
+          <label for="rows">Rows (1-1000):</label>
+          <input 
+            type="number" 
+            id="rows" 
+            name="rows" 
+            [(ngModel)]="rows" 
+            min="1" 
+            max="1000"
+            required
+          >
+          <div class="error-message" *ngIf="rowsError">{{ rowsError }}</div>
+        </div>
+  
+        <div class="form-group">
+          <label for="columns">Columns (1-702):</label>
+          <input 
+            type="number" 
+            id="columns" 
+            name="columns" 
+            [(ngModel)]="columns" 
+            min="1" 
+            max="702"
+            required
+          >
+          <div class="error-message" *ngIf="columnsError">{{ columnsError }}</div>
+        </div>
+  
+        <div class="form-group">
+          <label for="colors">Colors (1-10):</label>
+          <input 
+            type="number" 
+            id="colors" 
+            name="colors" 
+            [(ngModel)]="colors" 
+            min="1" 
+            max="10"
+            required
+          >
+          <div class="error-message" *ngIf="colorsError">{{ colorsError }}</div>
+        </div>
+  
+        <button type="submit" class="btn-generate">Generate Color Coordinate Sheet</button>
+      </form>
+    </div>
+  
+    <!--to generate tables -->
+    <div class="tables-container" *ngIf="isTableGenerated">
+      <!-- Table 1-->
+      <h2>Color Selection</h2>
+      <table class="color-selection-table">
+        <tbody>
+          <tr *ngFor="let color of selectedColors; let i = index">
+            <td class="selector-cell">
+              <input 
+                type="radio" 
+                name="colorRadio" 
+                [id]="'colorRadio' + i" 
+                [checked]="selectedRadioIndex === i"
+                (change)="selectRadio(i)"
+              >
+              <select 
+                [id]="'colorSelect' + i" 
+                [(ngModel)]="selectedColors[i]"
+                (ngModelChange)="onColorChange(i, $event)"
+              >
+                <option *ngFor="let availColor of availableColors" [value]="availColor">
+                  {{ availColor }}
+                </option>
+              </select>
+            </td>
+            <td class="color-display-cell">
+              <!--this cell will be used later for pt 2 -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <!-- Table 2  -->
+      <h2>Color Coordinate Sheet</h2>
+      <div class="painting-table-container">
+        <table class="color-painting-table">
+          <thead>
+            <tr>
+              <th></th> <!-- empty-->
+              <th *ngFor="let label of columnLabels">{{ label }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rowNum of rowNumbers; let rowIndex = index">
+              <td class="row-number">{{ rowNum }}</td>
+              <td 
+                *ngFor="let col of columnLabels; let colIndex = index" 
+                class="paintable-cell"
+                (click)="onCellClick(rowIndex, colIndex)"
+              ></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- the priint Button -->
+      <div class="action-buttons">
+        <button (click)="printPage()" class="btn-print">Print</button>
+        <button (click)="resetForm()" class="btn-reset">Create New Sheet</button>
+      </div>
+    </div>
+  </div>
