@@ -5,12 +5,6 @@
 	box-sizing: border-box;
   }
   
-  body {
-	font-family: Arial, sans-serif;
-	line-height: 1.6;
-	color: #1a202c;
-  }
-  
   /* Main container and layout */
   .app-container {
 	display: flex;
@@ -20,7 +14,7 @@
   
   /* Header and navigation */
   header {
-	background-color: #1a365d;
+	background-color: #0b1d37;
 	color: white;
   }
   
