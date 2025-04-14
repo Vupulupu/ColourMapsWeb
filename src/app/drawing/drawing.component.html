@@ -71,7 +71,7 @@
                 [(ngModel)]="selectedColors[i]"
                 (ngModelChange)="onColorChange(i, $event)"
               >
-                <option *ngFor="let availColor of availableColors" [value]="availColor">
+                <option *ngFor="let availColor of availableColors" [value]="availColor" [disabled]="selectedColors.includes(availColor) && selectedColors[i] !== availColor">
                   {{ availColor }}
                 </option>
               </select>
