@@ -2,9 +2,56 @@
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap');
 
 :root {
+	--primary: #0F1F44;
+	--secondary: #2156A6;
+	--primary-background: #FAFBFF;
+	--secondary-background: #F0FAFF;
+	--accent: #DD6B20;
+	--accent-error: #b82c1a;
+	--accent-contrast: #8F3C0B;
+	--primary-text: var(--primary);
+	--accent-text: var(--secondary-background);
+	--primary-table-border: #CBD5E0;
+
+	--site-width: 1200px;
+	color: var(--primary-text);
 	font-family: "Radio Canada", sans-serif;
+	font-size: 14pt;
+
+	background: var(--primary-background);
 }
 
-body {
+* {
 	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+p {
+	font-size: 1.1rem;
+	line-height: 1.6;
+	text-align: center;
+}
+
+h1 {
+	margin: 30px 0;
+	text-align: center;
+}
+
+h2 {
+	margin: 20px 0;
+	font-size: 2.5rem;
+	text-align: center;
+}
+
+h3 {
+	margin: 20px 0;
+	font-size: 1.8rem;
+	text-align: center;
+}
+
+h4 {
+	margin: 10px 0;
+	font-size: 1.4rem;
+	text-align: center;
 }

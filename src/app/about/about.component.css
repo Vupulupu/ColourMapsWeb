@@ -1,43 +1,23 @@
 .about-container {
-    max-width: 1200px;
+    max-width: var(--site-width);
     margin: 0 auto;
     padding: 20px;
-    color: #2d3748; /* we can change to whatever  */
-  }
-  
-  h2 {
-    color: #3182ce; /* srimary blue color for now */
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 2.5rem;
-  }
-  
-  h3 {
-    color: #4a5568; /* secondary text color for now */
-    margin: 30px 0 20px;
-    text-align: center;
-    font-size: 1.8rem;
   }
   
   .about-intro {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    text-align: center;
+		margin: 0 auto;
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
   }
   
   .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
-    margin-top: 30px;
+    margin-top: 15px;
   }
   
   .team-member {
-    background-color: #fff;
+    background-color: white;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -47,7 +27,17 @@
   .team-member:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+		& h4 {
+			color: var(--primary);
+		}
   }
+
+	.team-member h4 {
+		color: var(--secondary);
+		margin: 0 0 10px;
+		font-size: 1.4rem;
+		transition: color .5s;
+	}
   
   .avatar-container {
     height: 300px;
@@ -63,12 +53,6 @@
   
   .member-info {
     padding: 20px;
-  }
-  
-  .member-info h4 {
-    color: #2b6cb0; /* slightly darker blue for names */
-    margin: 0 0 10px;
-    font-size: 1.4rem;
   }
   
   .member-info p {

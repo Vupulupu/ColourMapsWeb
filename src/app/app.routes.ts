@@ -5,7 +5,8 @@ import { DrawingComponent } from './drawing/drawing.component';
 
 export const routes: Routes = [
 	{ path: '', component: HomeComponent },
+	{ path: 'home', redirectTo: '', pathMatch: 'full'},
 	{ path: 'about', component: AboutComponent },
 	{ path: 'drawing', component: DrawingComponent },
-	{ path: '**', redirectTo: '/', pathMatch: 'full'}
+	{ path: '**', redirectTo: '', pathMatch: 'full'}
 ];

@@ -1,10 +1,5 @@
 /* Reset and base styles had to get help for this online  */
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-  }
-  
+
   /* Main container and layout */
   .app-container {
 	display: flex;
@@ -14,8 +9,8 @@
   
   /* Header and navigation */
   header {
-	background-color: #0b1d37;
-	color: white;
+	background-color: var(--primary);
+	color: var(--accent-text);
   }
   
   .navbar {
@@ -27,19 +22,33 @@
 	margin: 0 auto;
   }
   
-  .logo-container {
+  .hover-logo-container {
+    position: relative;
 	display: flex;
 	align-items: center;
   }
   
-  .logo-container img {
+  .hover-logo-container img {
 	height: 40px;
 	margin-right: 1rem;
   }
-  
-  .logo-container h1 {
-	margin: 0;
-	font-size: 1.5rem;
+
+  .logo-overlay {
+    position: absolute;
+		opacity: 100;
+    transition: ease .25s;
+  }
+
+  .logo-underlay {
+	transition: ease .25s
+  }
+
+  .hover-logo-container:hover .logo-overlay {
+    opacity: 0
+  }
+
+  .hover-logo-container:hover .logo-underlay {
+    filter: drop-shadow(0 0 10px black);
   }
   
   .nav-links {
@@ -52,19 +61,22 @@
   }
   
   .nav-links a {
-	color: white;
+	color: var(--accent-text);
 	text-decoration: none;
 	padding: 0.5rem;
 	border-radius: 4px;
-	transition: background-color 0.3s;
+	box-sizing: border-box;
+	transition: background-color .3s;
   }
+
+.nav-links a.active {
+	background-color: color-mix(in srgb, var(--secondary) 20%, transparent);
+	border-bottom: 1px solid var(--accent);
+	box-shadow: inset 0 -.18rem 0 -.12rem var(--accent);
+}
   
   .nav-links a:hover {
-	background-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .nav-links a.active {
-	background-color: rgba(255, 255, 255, 0.3);
+	background-color: var(--secondary);
   }
   
   /* Main content */
@@ -74,10 +86,12 @@
   
   /* Footer */
   footer {
-	background-color: #1a365d;
-	color: white;
-	text-align: center;
+	background-color: var(--primary);
+	color: var(--accent-text);
 	padding: 1rem;
+	& p {
+		font-size: .8rem;
+	}
   }
   
   /* Responsive design */
@@ -86,7 +100,7 @@
 	  flex-direction: column;
 	}
 	
-	.logo-container {
+	.hover-logo-container {
 	  margin-bottom: 1rem;
 	}
 	
