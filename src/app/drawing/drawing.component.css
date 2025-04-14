@@ -1,62 +1,47 @@
 
 .drawing-container {
-    max-width: 1200px;
+    max-width: var(--site-width);
     margin: 0 auto;
     padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    color: #1a365d;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2rem;
-  }
-  
-  h2 {
-    color: #2b6cb0;
-    margin: 25px 0 15px;
-    font-size: 1.5rem;
   }
   
   /*form styling */
   .form-container {
-    background-color: #f8fafc;
+    background-color: white;
     border-radius: 8px;
     padding: 30px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 600px;
-    margin: 0 auto;
+    margin: 30px auto;
   }
   
   .form-group {
-    margin-bottom: 20px;
+    margin: 20px 0;
   }
   
   label {
     display: block;
     margin-bottom: 8px;
-    font-weight: bold;
-    color: #4a5568;
+		font-weight: bold;
   }
   
   input[type="number"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #cbd5e0;
+    border: 1px solid var(--primary);
     border-radius: 4px;
     font-size: 16px;
   }
   
   .error-message {
-    color: #e53e3e;
+    color: var(--accent-error);
     margin-top: 5px;
     font-size: 14px;
     font-weight: bold;
   }
   
   .btn-generate {
-    background-color: #2b6cb0;
+    background-color: var(--accent);
     color: white;
     border: none;
     padding: 12px 20px;
@@ -69,25 +54,24 @@
   }
   
   .btn-generate:hover {
-    background-color: #1a365d;
+    background-color: var(--accent-contrast);
   }
   
   /*color selection table */
   .color-selection-table {
     width: 100%;
+		border: 1px solid var(--primary-table-border);
     border-collapse: collapse;
+		background-color: white;
     margin-bottom: 30px;
-    border: 1px solid #cbd5e0;
   }
   
   .color-selection-table td {
-    border: 1px solid #cbd5e0;
+		border: 1px solid var(--primary-table-border);
     padding: 10px;
   }
-  
-  .selector-cell {
-    width: 91.2%;
-    background-color: #f8fafc;
+
+  .selector-cell div {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -101,7 +85,7 @@
     flex-grow: 1;
     width: 20%;
     padding: 8px;
-    border: 1px solid #cbd5e0;
+		border: 1px solid var(--primary-table-border);
     border-radius: 4px;
   }
   
@@ -118,25 +102,19 @@
   .color-painting-table {
     border-collapse: collapse;
     min-width: 100%;
-    border: 1px solid #cbd5e0;
+		border: 1px solid var(--primary-table-border);
   }
   
   .color-painting-table th, 
   .color-painting-table td {
-    border: 1px solid #cbd5e0;
+    border: 1px solid var(--primary-table-border);
     padding: 8px;
     text-align: center;
   }
   
-  .color-painting-table th {
-    background-color: #1a365d;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .row-number {
-    background-color: #1a365d;
-    color: white;
+  .color-painting-table th, .row-number {
+    background-color: var(--primary);
+    color: var(--accent-text);
     font-weight: bold;
     width: 1px;
     max-width: 1px;
@@ -147,11 +125,6 @@
     width: 30px;
     height: 30px;
     cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .paintable-cell:hover {
-    background-color: #ebf8ff;
   }
   
   /*action buttons */
@@ -161,7 +134,7 @@
   }
   
   .btn-print, .btn-reset {
-    background-color: #2b6cb0;
+    background-color: var(--accent);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -174,15 +147,15 @@
   }
   
   .btn-print:hover, .btn-reset:hover {
-    background-color: #1a365d;
+    background-color: var(--accent-contrast);
   }
   
   .btn-reset {
-    background-color: #4a5568;
+    background-color: var(--secondary);
   }
   
   .btn-reset:hover {
-    background-color: #2d3748;
+    background-color: var(--primary);
   }
   
   /*print styles */
@@ -207,7 +180,7 @@
       left: 10px;
       width: 100px;
       height: 100px;
-      /*background-image: url('../../assets/images/logo.png'); maight have to fix */
+      background-image: url('../../../public/logo-header.svg');
       background-size: contain;
       background-repeat: no-repeat;
     }

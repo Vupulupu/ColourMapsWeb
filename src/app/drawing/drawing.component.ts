@@ -16,7 +16,7 @@ export class DrawingComponent {
   columns: number | null = null;
   colors: number | null = null;
 
-  //fpr error messages
+  //for error messages
   rowsError: string = '';
   columnsError: string = '';
   colorsError: string = '';
@@ -120,6 +120,7 @@ export class DrawingComponent {
   }
   //print
   printPage(): void {
+
     window.print();
   }
   //reset form to create a new sheet

@@ -1,22 +1,23 @@
 <div class="app-container">
 	<header>
-	  <nav class="navbar">
-		<div class="logo-container">
-		  <img src="logo-header.svg" alt="ColorCoord header logo">
-		</div>
-		<ul class="nav-links">
-		  <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-		  <li><a routerLink="/about" routerLinkActive="active">About Us</a></li>
-		  <li><a routerLink="/drawing" routerLinkActive="active">Color Coordinates</a></li>
-		</ul>
-	  </nav>
+		<nav class="navbar">
+			<a routerLink="/" routerLinkActive="active" class="hover-logo-container">
+				<img class="logo-underlay" src="logo-header.svg" alt="ColorCoord header logo">
+				<img class="logo-overlay" src="logo-header-light.svg">
+			</a>
+			<ul class="nav-links">
+				<li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+				<li><a routerLink="/about" routerLinkActive="active">About Us</a></li>
+				<li><a routerLink="/drawing" routerLinkActive="active">Color Coordinates</a></li>
+			</ul>
+		</nav>
 	</header>
-  
+
 	<main class="main-content">
-	  <router-outlet></router-outlet>
+		<router-outlet></router-outlet>
 	</main>
-  
+
 	<footer>
-	  <p>&copy; 2025 ColorCoord. All rights reserved.</p>
+		<p>&copy; 2025 ColorCoord. All rights reserved.</p>
 	</footer>
-  </div>
+</div>
