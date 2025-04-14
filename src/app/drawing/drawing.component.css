@@ -70,7 +70,7 @@
 		border: 1px solid var(--primary-table-border);
     padding: 10px;
   }
-  
+
   .selector-cell div {
     display: flex;
     align-items: center;
@@ -83,6 +83,7 @@
   
   .selector-cell select {
     flex-grow: 1;
+    width: 20%;
     padding: 8px;
 		border: 1px solid var(--primary-table-border);
     border-radius: 4px;
@@ -115,6 +116,9 @@
     background-color: var(--primary);
     color: var(--accent-text);
     font-weight: bold;
+    width: 1px;
+    max-width: 1px;
+    min-width: 1px;
   }
   
   .paintable-cell {
@@ -168,7 +172,7 @@
     body {
       filter: grayscale(100%);
     }
-  
+
     .drawing-container::before {
       content: "";
       position: absolute;
