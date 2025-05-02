@@ -33,6 +33,9 @@ export class DrawingComponent {
   selectedColors: string[] = [];
   selectedRadioIndex: number = 0;
 
+  activeColorIndex: number = 0;
+  cellColors: string[][] = [];
+  colorCoordinates: { [color: string]: string[] } = {};
   //validate  inputs
   validateForm(): void {
     this.rowsError = '';
@@ -62,14 +65,18 @@ export class DrawingComponent {
     if (this.isFormValid && this.rows !== null && this.columns !== null && this.colors !== null) {
       //color selection with default values
       this.selectedColors = [];
+      this.colorCoordinates = {};
       for (let i = 0; i < this.colors; i++) {
-        this.selectedColors.push(this.availableColors[i % this.availableColors.length]);
+        const color = this.availableColors[i % this.availableColors.length];
+        this.selectedColors.push(color);
+        this.colorCoordinates[color] = [];
       }
       //first radio button as selected
       this.selectedRadioIndex = 0;
       // Excel-style column headers (A, B, ..., Z, AA, ...) this was ahrd got help online
       this.generateColumnLabels();
       this.rowNumbers = Array.from({ length: this.rows }, (_, i) => i + 1);
+      this.cellColors = Array.from({ length: this.rows! }, () => Array(this.columns!).fill(''));
       this.isTableGenerated = true;
     }
   }
@@ -97,26 +104,59 @@ export class DrawingComponent {
 
   // Handle radio button selection
   selectRadio(index: number): void {
+    this.activeColorIndex = index;
     this.selectedRadioIndex = index;
   }
   // Handle color selection change
-  onColorChange(index: number, color: string): void {
-    // Check if the color is already selected in another row
-    const existingIndex = this.selectedColors.findIndex(
-      (c, i) => c === color && i !== index
-    );
-    if (existingIndex !== -1) {
-      //swap the colors
-      const temp = this.selectedColors[index];
-      this.selectedColors[index] = color;
-      this.selectedColors[existingIndex] = temp;
-    } else {
-      this.selectedColors[index] = color;
-    }
+  onColorChange(index: number, newColor: string): void {
+    const oldColor = this.selectedColors[index];
+
+    this.cellColors.forEach((row, rIndex) => {
+      row.forEach((cellColor, cIndex) => {
+        if (cellColor === oldColor) {
+          this.cellColors[rIndex][cIndex] = newColor;
+          const cellElement = document.querySelectorAll('.paintable-cell')[rIndex * this.columns! + cIndex] as HTMLElement;
+          if (cellElement) {
+            cellElement.style.backgroundColor = newColor;
+          }
+        }
+      });
+    });
+  
+    this.colorCoordinates[newColor] = this.colorCoordinates[oldColor] ?? [];
+    delete this.colorCoordinates[oldColor];
+  
+    this.selectedColors[index] = newColor;
+    this.updateColorDisplayCells();
   }
+  
   //handle cell click
   onCellClick(rowIndex: number, colIndex: number): void {
-    alert(`${this.columnLabels[colIndex]}${rowIndex + 1}`);
+    const activeColor = this.selectedColors[this.activeColorIndex];
+    const prevColor = this.cellColors[rowIndex][colIndex];
+    const coordinate = `${this.columnLabels[colIndex]}${rowIndex + 1}`;
+  
+    if (prevColor) {
+      const index = this.colorCoordinates[prevColor].indexOf(coordinate);
+      if (index > -1) {
+        this.colorCoordinates[prevColor].splice(index, 1);
+      }
+    }
+  
+    this.cellColors[rowIndex][colIndex] = activeColor;
+    if (!this.colorCoordinates[activeColor].includes(coordinate)) {
+      this.colorCoordinates[activeColor].push(coordinate);
+      this.colorCoordinates[activeColor].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+    }
+  
+    this.updateColorDisplayCells();
+  }
+
+  updateColorDisplayCells(): void {
+    this.selectedColors.forEach((color, index) => {
+      const displayCell = document.querySelectorAll('.color-display-cell')[index] as HTMLElement;
+      displayCell.textContent = this.colorCoordinates[color].join(', ');
+    });
   }
   //print
   printPage(): void {

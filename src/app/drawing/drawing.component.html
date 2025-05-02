@@ -104,8 +104,9 @@
               <td 
                 *ngFor="let col of columnLabels; let colIndex = index" 
                 class="paintable-cell"
+                [style.backgroundColor]="cellColors[rowIndex][colIndex]"
                 (click)="onCellClick(rowIndex, colIndex)"
-              ></td>
+            ></td>
             </tr>
           </tbody>
         </table>
