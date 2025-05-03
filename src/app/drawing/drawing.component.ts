@@ -31,6 +31,8 @@ export class DrawingComponent {
     'purple', 'grey', 'brown', 'black', 'teal'
   ];
   selectedColors: string[] = [];
+  //unbound selectedColors for fetching color before new selection
+  previousSelectedColors: string[] = [];
   selectedRadioIndex: number = 0;
 
   activeColorIndex: number = 0;
@@ -69,8 +71,10 @@ export class DrawingComponent {
       for (let i = 0; i < this.colors; i++) {
         const color = this.availableColors[i % this.availableColors.length];
         this.selectedColors.push(color);
+        this.previousSelectedColors.push(color);
         this.colorCoordinates[color] = [];
       }
+
       //first radio button as selected
       this.selectedRadioIndex = 0;
       // Excel-style column headers (A, B, ..., Z, AA, ...) this was ahrd got help online
@@ -109,7 +113,7 @@ export class DrawingComponent {
   }
   // Handle color selection change
   onColorChange(index: number, newColor: string): void {
-    const oldColor = this.selectedColors[index];
+    const oldColor = this.previousSelectedColors[index];
 
     this.cellColors.forEach((row, rIndex) => {
       row.forEach((cellColor, cIndex) => {
@@ -122,11 +126,12 @@ export class DrawingComponent {
         }
       });
     });
-  
+
     this.colorCoordinates[newColor] = this.colorCoordinates[oldColor] ?? [];
     delete this.colorCoordinates[oldColor];
   
     this.selectedColors[index] = newColor;
+    this.previousSelectedColors[index] = newColor;
     this.updateColorDisplayCells();
   }
   
@@ -142,7 +147,6 @@ export class DrawingComponent {
         this.colorCoordinates[prevColor].splice(index, 1);
       }
     }
-  
     this.cellColors[rowIndex][colIndex] = activeColor;
     if (!this.colorCoordinates[activeColor].includes(coordinate)) {
       this.colorCoordinates[activeColor].push(coordinate);
@@ -153,9 +157,9 @@ export class DrawingComponent {
   }
 
   updateColorDisplayCells(): void {
+    const displayCells = [... document.querySelectorAll('.color-display-cell')] as HTMLElement[];
     this.selectedColors.forEach((color, index) => {
-      const displayCell = document.querySelectorAll('.color-display-cell')[index] as HTMLElement;
-      displayCell.textContent = this.colorCoordinates[color].join(', ');
+      displayCells[index].textContent = this.colorCoordinates[color].join(', ');
     });
   }
   //print
