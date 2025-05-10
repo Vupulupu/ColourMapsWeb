@@ -1,4 +1,3 @@
-
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -32,6 +31,20 @@ export class DrawingComponent {
     'red', 'orange', 'yellow', 'green', 'blue',
     'purple', 'grey', 'brown', 'black', 'teal'
   ];
+
+  availableColorObjects = [
+    { name: 'red', hex: '#FF0000' },
+    { name: 'orange', hex: '#FFA500' },
+    { name: 'yellow', hex: '#FFFF00' },
+    { name: 'green', hex: '#008000' },
+    { name: 'blue', hex: '#0000FF' },
+    { name: 'purple', hex: '#800080' },
+    { name: 'grey', hex: '#808080' },
+    { name: 'brown', hex: '#A52A2A' },
+    { name: 'black', hex: '#000000' },
+    { name: 'teal', hex: '#008080' }
+  ];
+  
   selectedColors: string[] = [];
   //unbound selectedColors for fetching color before new selection
   previousSelectedColors: string[] = [];
@@ -40,6 +53,13 @@ export class DrawingComponent {
   activeColorIndex: number = 0;
   cellColors: string[][] = [];
   colorCoordinates: { [color: string]: string[] } = {};
+  
+  // Method to get hex code for a color name
+  getHexForColor(colorName: string): string {
+    const colorObj = this.availableColorObjects.find(c => c.name === colorName);
+    return colorObj ? colorObj.hex : '';
+  }
+  
   //validate  inputs
   validateForm(): void {
     this.rowsError = '';
@@ -174,7 +194,6 @@ export class DrawingComponent {
   }
   //print
   printPage(): void {
-
     window.print();
   }
   //reset form to create a new sheet

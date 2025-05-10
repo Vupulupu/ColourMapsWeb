@@ -57,28 +57,34 @@
     <!--to generate tables -->
     <div class="tables-container" *ngIf="isTableGenerated">
       <!-- Table 1-->
-      <h3>Color Selection</h3>
+    <h3>Color Selection</h3>
       <table class="color-selection-table">
         <tbody>
           <tr *rxFor="let color of selectedColors; let i = index">
             <td class="selector-cell">
               <div>
                 <input
-                        type="radio"
-                        name="colorRadio"
-                        [id]="'colorRadio' + i"
-                        [checked]="selectedRadioIndex === i"
-                        (change)="selectRadio(i)"
+                  type="radio"
+                  name="colorRadio"
+                  [id]="'colorRadio' + i"
+                  [checked]="selectedRadioIndex === i"
+                  (change)="selectRadio(i)"
                 >
                 <select
-                        [id]="'colorSelect' + i"
-                        [(ngModel)]="selectedColors[i]"
-                        (ngModelChange)="onColorChange(i, $event)"
+                  [id]="'colorSelect' + i"
+                  [(ngModel)]="selectedColors[i]"
+                  (ngModelChange)="onColorChange(i, $event)"
                 >
-                  <option *rxFor="let availColor of availableColors" [value]="availColor" [disabled]="selectedColors.includes(availColor) && selectedColors[i] !== availColor">
-                    {{ availColor }}
+                  <option
+                    *rxFor="let availColor of availableColorObjects"
+                    [value]="availColor.name"
+                    [disabled]="selectedColors.includes(availColor.name) && selectedColors[i] !== availColor.name"
+                  >
+                    {{ availColor.name }}
                   </option>
                 </select>
+                <span class="hex-code">({{ getHexForColor(selectedColors[i]) }})</span>
+                <span class="print-color-name">{{ selectedColors[i] }}</span>
               </div>
             </td>
             <td class="color-coords-cell" [textContent]="colorCoordinates[color].join(', ')">
