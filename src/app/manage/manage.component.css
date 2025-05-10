@@ -1,0 +1,6 @@
+
+.manage-container {
+	max-width: var(--site-width);
+	margin: 0 auto;
+	padding: 20px;
+}
