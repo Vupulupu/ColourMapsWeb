@@ -1,14 +1,16 @@
 
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RxFor } from '@rx-angular/template/for';
 
 @Component({
   selector: 'app-drawing',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RxFor],
   templateUrl: './drawing.component.html',
-  styleUrls: ['./drawing.component.css']
+  styleUrls: ['./drawing.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawingComponent {
   //form the values
@@ -85,6 +87,14 @@ export class DrawingComponent {
     }
   }
 
+  trackRow(index: number, item: any): string {
+    return `row-${index}`;
+  }
+
+  trackCol(index: number, item: any): string {
+    return `col-${index}`;
+  }
+
   //generate Excel-style column 
   generateColumnLabels(): void {
     if (!this.columns) return;
@@ -157,7 +167,7 @@ export class DrawingComponent {
   }
 
   updateColorDisplayCells(): void {
-    const displayCells = [... document.querySelectorAll('.color-display-cell')] as HTMLElement[];
+    const displayCells = [... document.querySelectorAll('.color-coords-cell')] as HTMLElement[];
     this.selectedColors.forEach((color, index) => {
       displayCells[index].textContent = this.colorCoordinates[color].join(', ');
     });

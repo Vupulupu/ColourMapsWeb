@@ -1,9 +1,9 @@
 
 <div class="drawing-container">
-    <h2>Color Coordinate Generator</h2>
+    <h2>Generate a New Color Sheet</h2>
     <!--input Form -->
     <div class="form-container" *ngIf="!isTableGenerated">
-      <h4>Enter This Sheet's Size and Colors</h4>
+      <h4>Enter Sheet Size and Number of Colors</h4>
       <form (submit)="$event.preventDefault(); generateTables()">
         <div class="form-group">
           <label for="rows">Rows (1-1000):</label>
@@ -50,7 +50,7 @@
           <div class="error-message" *ngIf="colorsError">{{ colorsError }}</div>
         </div>
   
-        <button type="submit" class="btn-generate">Generate Color Coordinate Sheet</button>
+        <button type="submit" class="generate-button">Generate Color Coordinate Sheet</button>
       </form>
     </div>
   
@@ -60,7 +60,7 @@
       <h3>Color Selection</h3>
       <table class="color-selection-table">
         <tbody>
-          <tr *ngFor="let color of selectedColors; let i = index">
+          <tr *rxFor="let color of selectedColors; let i = index">
             <td class="selector-cell">
               <div>
                 <input
@@ -75,13 +75,13 @@
                         [(ngModel)]="selectedColors[i]"
                         (ngModelChange)="onColorChange(i, $event)"
                 >
-                  <option *ngFor="let availColor of availableColors" [value]="availColor" [disabled]="selectedColors.includes(availColor) && selectedColors[i] !== availColor">
+                  <option *rxFor="let availColor of availableColors" [value]="availColor" [disabled]="selectedColors.includes(availColor) && selectedColors[i] !== availColor">
                     {{ availColor }}
                   </option>
                 </select>
               </div>
             </td>
-            <td class="color-display-cell" [textContent]="colorCoordinates[color].join(', ')">
+            <td class="color-coords-cell" [textContent]="colorCoordinates[color].join(', ')">
               <!--this cell will be used later for pt 2 -->
             </td>
           </tr>
@@ -94,25 +94,24 @@
         <table class="color-painting-table">
           <thead>
             <tr>
-              <th></th> <!-- empty-->
-              <th *ngFor="let label of columnLabels">{{ label }}</th>
+              <th class="corner-cell"></th> <!-- empty-->
+              <th *rxFor="let label of columnLabels" class="col-number"><div>{{ label }}</div></th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let rowNum of rowNumbers; let rowIndex = index">
-              <td class="row-number">{{ rowNum }}</td>
-              <td 
-                *ngFor="let col of columnLabels; let colIndex = index" 
-                class="paintable-cell"
-                [style.backgroundColor]="cellColors[rowIndex][colIndex]"
-                (click)="onCellClick(rowIndex, colIndex)"
-            ></td>
+            <tr *rxFor="let rowNum of rowNumbers; let rowIndex = index; trackBy: trackRow">
+              <td class="row-number"><div>{{ rowNum }}</div></td>
+              <td *rxFor="let col of columnLabels; let colIndex = index; trackBy: trackCol"
+                  class="paintable-cell"
+                  [style.backgroundColor]="cellColors[rowIndex][colIndex]"
+                  (click)="onCellClick(rowIndex, colIndex)"
+            ><div></div></td>
             </tr>
           </tbody>
         </table>
       </div>
   
-      <!-- the priint Button -->
+      <!-- the print Button -->
       <div class="action-buttons">
         <button (click)="printPage()" class="btn-print">Print</button>
         <button (click)="resetForm()" class="btn-reset">Create New Sheet</button>
