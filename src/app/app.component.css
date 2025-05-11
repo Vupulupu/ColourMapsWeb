@@ -12,6 +12,11 @@
 	background-color: var(--primary);
 	color: var(--accent-text);
   }
+
+.print-logo {
+	height: 40px;
+	display: none;
+}
   
   .navbar {
 	display: flex;
@@ -124,3 +129,19 @@
 	  margin: 0.5rem 0;
 	}
   }
+
+@media print {
+	header:has(~main>app-drawing), footer:has(~main>app-drawing) {
+		background: none;
+	}
+
+	header:has(~main>app-drawing) {
+		& > .print-logo {
+			display: flex;
+			filter: grayscale(100%);
+		}
+		& > .navbar {
+			display: none;
+		}
+	}
+}

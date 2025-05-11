@@ -83,11 +83,10 @@
                     {{ availColor.name }}
                   </option>
                 </select>
-                <span class="hex-code">({{ getHexForColor(selectedColors[i]) }})</span>
-                <span class="print-color-name">{{ selectedColors[i] }}</span>
+                <span class="print-name-hex"><strong>{{ selectedColors[i] }}</strong>&nbsp;({{ getHexForColor(selectedColors[i]) }})</span>
               </div>
             </td>
-            <td class="color-coords-cell" [textContent]="colorCoordinates[color].join(', ')">
+            <td class="color-coords-cell" [textContent]="colorCoordinates[color]?.join(', ')">
               <!--this cell will be used later for pt 2 -->
             </td>
           </tr>

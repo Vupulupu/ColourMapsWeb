@@ -11,17 +11,16 @@
 	border-collapse: collapse;
 	background-color: white;
 	margin-bottom: 30px;
+	& td {
+		border: 1px solid var(--primary-table-border);
+		padding: 10px;
+	}
 }
 
-.color-selection-table td {
-	border: 1px solid var(--primary-table-border);
-	padding: 10px;
-}
-
-.selector-cell div {
+.selector-cell>div {
 	display: flex;
 	align-items: center;
-	gap: 10px;
+	justify-content: right;
 }
 
 .selector-cell input[type="radio"] {
@@ -78,8 +77,9 @@
 	}
 }
 
-.print-color-name {
+.print-name-hex {
   display: none;
+	margin-left: 5px;
 }
 
 /*action buttons */
@@ -113,86 +113,37 @@
 	background-color: var(--primary);
 }
 
-.hex-code {
-  display: none;
-  margin-left: 5px;
-}
-
-.print-only-logo {
-  display: none;
-}
-
 /*print styles */
 @media print {
 	.form-container, .action-buttons {
 		display: none;
 	}
 
-	.print-color-name {
-    	display: inline !important;
-		font-weight: bold;
+	.print-name-hex {
+		display: inline-flex;
 		text-transform: capitalize;
- 	}
+		text-align: right;
+	}
 
-	.selector-cell input[type="radio"]{
+	.color-selection-table {
+		border-width: 2px;
+	}
+
+	.selector-cell input[type="radio"] {
 		display: none;
 	}
 
-  	.selector-cell select {
-    	display: none !important;
-  	}
-
-	.hex-code {
-		display: inline !important;
-		font-weight: normal;
-		color: #333 !important;
-		margin-left: 5px;
-  	}
-
-	body {
-		filter: grayscale(100%);
+	.selector-cell select {
+		display: none;
 	}
 
 	.paintable-cell {
-        background-color: white !important;
-    }
-
-	h2, h3, h4, .color-selection-table, .color-painting-table {
-		color: black !important;
-		border-color: #333 !important;
-  	}
+		filter: grayscale(100%);
+	}
 
 	.col-number, .row-number, .corner-cell {
-		background-color: #eee !important;
-		color: black !important;
-  	}
-
-	.color-selection-table, .color-painting-table,
-  	.color-selection-table td, .color-painting-table td,
-  	.color-painting-table th {
-		border-color: #333 !important;
-		border-width: 1px !important;
-  	}
-
-	.color-coords-cell {
-    	color: black !important;
-  	}
-
-	.print-only-logo {
-		display: block;
-		position: absolute;
-		top: 0;
-		left: 0;
-		z-index: 9999;
-  	}
-
-	.print-only-logo img {
-		width: 100px;
-		height: auto;
-  	}
-
-	.drawing-container::before {
-		display: none;
+		color: black;
+		background: none;
 	}
 }
 
