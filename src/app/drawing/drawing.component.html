@@ -61,14 +61,13 @@
       <table class="color-selection-table">
         <tbody>
           <tr *rxFor="let color of selectedColors; let i = index">
-            <td class="selector-cell">
+            <td class="selector-cell" (click)="selectRadio(i)">
               <div>
                 <input
                   type="radio"
                   name="colorRadio"
                   [id]="'colorRadio' + i"
                   [checked]="selectedRadioIndex === i"
-                  (change)="selectRadio(i)"
                 >
                 <select
                   [id]="'colorSelect' + i"
