@@ -107,3 +107,10 @@ input:not([type="submit"]) {
 .generate-button:hover {
 	background-color: var(--accent-contrast);
 }
+
+@media print {
+	:root:has(.drawing-container) {
+		color: black;
+		background: none;
+	}
+}
