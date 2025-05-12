@@ -4,3 +4,9 @@
 	margin: 0 auto;
 	padding: 20px;
 }
+
+.form-note {
+	margin-top: 1rem;
+	background: none;
+	color: var(--primary);
+}
