@@ -6,7 +6,7 @@
       <div class="error-alert" *ngIf="authenticateError">{{ authenticateError }}</div>
 
       <div class="form-group">
-        <label for="database">Database name:</label>
+        <label for="database">Database:</label>
         <input
                 type="text"
                 id="database"
@@ -49,5 +49,38 @@
       <p class="form-note">Database not set up?</p>
       <button type="submit" (click)="isNewDatabase=true" class="submit-button accent">Create a new Database</button>
     </form>
+  </div>
+
+  <div class="colors-container" *ngIf="colorsFetched">
+    <h3>Colors from '{{ databaseName }}'</h3>
+    <p class="page-description">These colors are used when making color sheets rather than the default 10 colors provided.</p>
+    <div class="list-actions">
+      <div>
+        <div class="selection-actions" *ngIf="selectedColors.length>0">
+          <p>{{ `${selectedColors.length} selected` }}</p>
+          <button>Delete</button>
+        </div>
+      </div>
+      <div><button class="inline-button">Add Color</button></div>
+    </div>
+
+    <table class="color-management-table">
+      <thead>
+      <tr>
+        <th class="corner-cell color-check"></th>
+        <th>ID</th>
+        <th>Name</th>
+        <th><div class="split-cell"><p>Hex Code</p><p class="table-header-supplemental">preview</p></div></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *rxFor="let color of colors">
+        <td><div class="color-check" (click)="selectColor"><input type="checkbox"/></div></td>
+        <td>{{ color["id"] }}</td>
+        <td><div class="split-cell">{{ color["name"] }}<button>edit name</button></div></td>
+        <td><div class="split-cell">{{ color["hex"] }}<div><div class="hex-preview" [style.background-color]="color['hex']"></div><button>edit hex</button></div></div></td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>

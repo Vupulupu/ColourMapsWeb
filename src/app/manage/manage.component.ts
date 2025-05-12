@@ -24,8 +24,9 @@ export class ManageComponent {
   isNewDatabase: boolean = false;
   colorsFetched: boolean = false;
   authenticateError: string = '';
-
   private http = inject(HttpClient);
+
+  selectedColors: number[] = [];
 
   signIntoDatabase(): void {
     const requestBody: { [key: string]: number | string | boolean } = {
@@ -47,6 +48,10 @@ export class ManageComponent {
         this.authenticateError = err.error.error;
       }
     });
+  }
+
+  selectColor(): void {
+    // something
   }
 }
 
