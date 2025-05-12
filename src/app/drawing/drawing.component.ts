@@ -1,4 +1,3 @@
-
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,24 +13,38 @@ import { RxFor } from '@rx-angular/template/for';
 })
 export class DrawingComponent {
   //form the values
-  rows: number | null = null;
-  columns: number | null = null;
-  colors: number | null = null;
+  rows: number | null;
+  columns: number | null;
+  colors: number | null;
 
   //for error messages
-  rowsError: string = '';
-  columnsError: string = '';
-  colorsError: string = '';
-  isFormValid: boolean = false;
-  isTableGenerated: boolean = false;
+  rowsError: string;
+  columnsError: string;
+  colorsError: string;
+  isFormValid: boolean;
+  isTableGenerated: boolean;
 
   //table data i got help with this online
-  columnLabels: string[] = [];
-  rowNumbers: number[] = [];
+  columnLabels: string[];
+  rowNumbers: number[];
   availableColors: string[] = [
     'red', 'orange', 'yellow', 'green', 'blue',
     'purple', 'grey', 'brown', 'black', 'teal'
   ];
+
+  availableColorObjects = [
+    { name: 'red', hex: '#FF0000' },
+    { name: 'orange', hex: '#FFA500' },
+    { name: 'yellow', hex: '#FFFF00' },
+    { name: 'green', hex: '#008000' },
+    { name: 'teal', hex: '#008080' },
+    { name: 'blue', hex: '#0000FF' },
+    { name: 'purple', hex: '#800080' },
+    { name: 'brown', hex: '#A52A2A' },
+    { name: 'grey', hex: '#808080' },
+    { name: 'black', hex: '#000000' },
+  ];
+  
   selectedColors: string[] = [];
   //unbound selectedColors for fetching color before new selection
   previousSelectedColors: string[] = [];
@@ -40,6 +53,26 @@ export class DrawingComponent {
   activeColorIndex: number = 0;
   cellColors: string[][] = [];
   colorCoordinates: { [color: string]: string[] } = {};
+
+  constructor() {
+    this.rows = null;
+    this.columns = null;
+    this.colors = null;
+    this.rowsError = '';
+    this.columnsError = '';
+    this.colorsError = '';
+    this.isFormValid = false;
+    this.isTableGenerated = false;
+    this.columnLabels = [];
+    this.rowNumbers = [];
+  }
+  
+  // Method to get hex code for a color name
+  getHexForColor(colorName: string): string {
+    const colorObj = this.availableColorObjects.find(c => c.name === colorName);
+    return colorObj ? colorObj.hex : '';
+  }
+  
   //validate  inputs
   validateForm(): void {
     this.rowsError = '';
@@ -79,7 +112,7 @@ export class DrawingComponent {
 
       //first radio button as selected
       this.selectedRadioIndex = 0;
-      // Excel-style column headers (A, B, ..., Z, AA, ...) this was ahrd got help online
+      // Excel-style column headers (A, B, ..., Z, AA, ...) this was hard got help online
       this.generateColumnLabels();
       this.rowNumbers = Array.from({ length: this.rows }, (_, i) => i + 1);
       this.cellColors = Array.from({ length: this.rows! }, () => Array(this.columns!).fill(''));
@@ -174,7 +207,6 @@ export class DrawingComponent {
   }
   //print
   printPage(): void {
-
     window.print();
   }
   //reset form to create a new sheet
@@ -186,5 +218,7 @@ export class DrawingComponent {
     this.rowsError = '';
     this.columnsError = '';
     this.colorsError = '';
+    this.selectedColors = [];
+    this.previousSelectedColors = [];
   }
 }

@@ -126,3 +126,10 @@ input:not([type="submit"]) {
 		background-color: var(--accent-contrast);
 	}
 }
+
+@media print {
+	:root:has(.drawing-container) {
+		color: black;
+		background: none;
+	}
+}
