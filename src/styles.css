@@ -78,7 +78,7 @@ label {
 	font-weight: bold;
 }
 
-input:not([type="submit"]) {
+input:is([type="text"],[type="password"],[type="number"]) {
 	width: 100%;
 	padding: 10px;
 	border: 1px solid var(--primary);
@@ -101,6 +101,12 @@ input:not([type="submit"]) {
 	background-color: var(--background-error);
 	color: var(--accent-error);
 	text-align: center;
+}
+
+.form-note {
+	margin-top: 1rem;
+	background: none;
+	color: var(--primary);
 }
 
 .submit-button {

@@ -24,12 +24,11 @@
 }
 
 .selector-cell input[type="radio"] {
-	margin-right: 10px;
+	margin: 0 .75rem 0 .25rem;
 }
 
 .selector-cell select {
 	flex-grow: 1;
-	width: 1100%;
 	padding: 8px;
 	border: 1px solid var(--primary-table-border);
 	border-radius: 4px;
