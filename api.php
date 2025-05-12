@@ -43,6 +43,7 @@ function parseRequest() {
 				break;
 			case "delete":
 				$conn = open_db($username, $password, $database);
+				if (!$conn) { return; }
 				delete_db($conn);
 				$conn->close();
 				break;
@@ -60,6 +61,7 @@ function parseRequest() {
 		 $new_hex = substr($new_hex, 1);
 	}
 	$conn = open_db($username, $password, $database);
+	if (!$conn) { return; }
 	switch(strtolower($_SERVER["REQUEST_METHOD"])) {
 		case "post":
 			if(!($colour_name && $colour_hex)) {
@@ -89,7 +91,8 @@ function open_server($username, $password, $server="faure") {
 	$conn = new mysqli($server, $username, $password);
 	if ($conn->connect_error) {
 		http_response_code(400);
-		echo json_encode(array("error"=>"Connection to server failed: ".$conn->connect_error));
+		echo json_encode(array("error"=>"Connection to database failed: ".$conn->connect_error));
+		return false;
 	}
 
 	return $conn;
@@ -100,6 +103,7 @@ function open_db($username, $password, $database, $server="faure") {
 	if ($conn->connect_error) {
 		http_response_code(400);
 		echo json_encode(array("error"=>"Connection to database failed: " . $conn->connect_error));
+		return false;
 	}
 
 	return $conn;
@@ -107,6 +111,7 @@ function open_db($username, $password, $database, $server="faure") {
 
 function setup_db($username, $password, $database) {
 	$conn = open_server($username, $password);
+	if (!$conn) { return; }
 	$db_exists = $conn->query("select exists (
 		select schemata.schema_name 
 		from information_schema.schemata 
@@ -118,6 +123,7 @@ function setup_db($username, $password, $database) {
 	$conn->close();
 
 	$conn = open_db($username, $password, $database);
+	if (!$conn) { return; }
 	$table_exists = $conn->query("select exists (
 		select `table_name` 
 		from information_schema.tables 
@@ -146,7 +152,8 @@ function setup_db($username, $password, $database) {
 			}
 			break;
 		default:
-			break;
+			get_colours($conn);
+			return;
 	}
 
 	$conn->close();
@@ -162,6 +169,7 @@ function create_table($conn) {
 	)")) {
 		http_response_code(400);
 		echo json_encode(array("error"=>"Could not create database: " . $conn->error));
+		return;
 	}
 }
 
