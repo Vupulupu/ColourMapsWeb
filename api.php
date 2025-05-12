@@ -7,11 +7,11 @@ if (strtolower($_SERVER["REQUEST_METHOD"]) === "options") {
 	return;
 }
 
-parseRequest();
+@parseRequest();
 
 function parseRequest() {
 
-	mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+	//mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 	$isDatabaseAction = false;
 	$request = json_decode(file_get_contents("php://input"));
 	if(!isset($request)) {
