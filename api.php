@@ -1,10 +1,15 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: *');
+header('content-type: application/json');
+if (strtolower($_SERVER["REQUEST_METHOD"]) === "options") {
+	http_response_code(200);
+	return;
+}
+
 parseRequest();
 
 function parseRequest() {
-	header('Access-Control-Allow-Origin: *');
-	header('Access-Control-Allow-Headers: *');
-	header('content-type: application/json');
 
 	mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 	$isDatabaseAction = false;
@@ -56,14 +61,15 @@ function parseRequest() {
 	}
 	$conn = open_db($username, $password, $database);
 	switch(strtolower($_SERVER["REQUEST_METHOD"])) {
-		case "get":
-			get_colours($conn);
-			break;
 		case "post":
-			$insert_id = add_colour($conn, $colour_name, $colour_hex);
-			$return_body = array("colors"=>array());
-			array_push($return_body["colors"], array("id"=>$insert_id, "name"=>$colour_name,"hex"=>'#'.$colour_hex));
-			echo json_encode($return_body);
+			if(!($colour_name && $colour_hex)) {
+				get_colours($conn);
+			} else {
+				$insert_id = add_colour($conn, $colour_name, $colour_hex);
+				$return_body = array("colors"=>array());
+				array_push($return_body["colors"], array("id"=>$insert_id, "name"=>$colour_name,"hex"=>'#'.$colour_hex));
+				echo json_encode($return_body);
+			}
 			break;
 		case "put":
 			edit_colour($conn, $colour_id, $colour_name, $colour_hex, $new_name, $new_hex);
