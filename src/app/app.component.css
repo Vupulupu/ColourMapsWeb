@@ -131,11 +131,8 @@
   }
 
 @media print {
-	header:has(~main>app-drawing), footer:has(~main>app-drawing) {
-		background: none;
-	}
-
 	header:has(~main>app-drawing) {
+		background: none;
 		& > .print-logo {
 			display: flex;
 			filter: grayscale(100%);
@@ -143,5 +140,10 @@
 		& > .navbar {
 			display: none;
 		}
+	}
+
+	/* annoying thing to select based on footer's previous siblings */
+	.app-container:has(>main>app-drawing)>footer {
+		display: none;
 	}
 }

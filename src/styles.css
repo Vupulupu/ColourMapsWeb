@@ -6,6 +6,8 @@
 	--secondary: #2156A6;
 	--primary-background: #FAFBFF;
 	--secondary-background: #F0FAFF;
+	--background-error: #FDB7B7;
+	--primary-error: #750606;
 	--accent: #DD6B20;
 	--accent-error: #b82c1a;
 	--accent-contrast: #8F3C0B;
@@ -76,7 +78,7 @@ label {
 	font-weight: bold;
 }
 
-input:not([type="submit"]) {
+input:is([type="text"],[type="password"],[type="number"]) {
 	width: 100%;
 	padding: 10px;
 	border: 1px solid var(--primary);
@@ -91,7 +93,23 @@ input:not([type="submit"]) {
 	font-weight: bold;
 }
 
-.generate-button {
+.error-alert {
+	width: 100%;
+	padding: .5rem 0;
+	border: solid 1px var(--primary-error);
+	border-radius: .5rem;
+	background-color: var(--background-error);
+	color: var(--accent-error);
+	text-align: center;
+}
+
+.form-note {
+	margin-top: 1rem;
+	background: none;
+	color: var(--primary);
+}
+
+.submit-button {
 	background-color: var(--accent);
 	color: white;
 	border: none;
@@ -102,10 +120,17 @@ input:not([type="submit"]) {
 	cursor: pointer;
 	width: 100%;
 	transition: background-color 0.3s;
-}
 
-.generate-button:hover {
-	background-color: var(--accent-contrast);
+	&.accent {
+		background-color: var(--secondary);
+		&:hover {
+			background-color: var(--primary);
+		}
+	}
+
+	&:hover {
+		background-color: var(--accent-contrast);
+	}
 }
 
 @media print {
